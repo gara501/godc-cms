@@ -7,9 +7,13 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Pages } from './collections/Pages'
+import { SiteSettings } from './globals/SiteSettings'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+const frontendURL = process.env.FRONTEND_URL || 'http://localhost:5173'
+const corsOrigins = Array.from(new Set([frontendURL, 'http://localhost:5173', 'http://127.0.0.1:5173']))
 
 export default buildConfig({
   admin: {
@@ -18,7 +22,9 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Pages],
+  globals: [SiteSettings],
+  cors: corsOrigins,
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
