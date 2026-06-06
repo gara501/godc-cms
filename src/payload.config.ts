@@ -14,6 +14,7 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 const frontendURL = process.env.FRONTEND_URL || 'http://localhost:5173'
 const corsOrigins = Array.from(new Set([frontendURL, 'http://localhost:5173', 'http://127.0.0.1:5173']))
+const databaseURL = process.env.POSTGRES_URL || process.env.DATABASE_URL || ''
 
 export default buildConfig({
   admin: {
@@ -32,7 +33,7 @@ export default buildConfig({
   },
   db: vercelPostgresAdapter({
     pool: {
-      connectionString: process.env.POSTGRES_URL || '',
+      connectionString: databaseURL,
     },
   }),
   sharp,
