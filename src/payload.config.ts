@@ -7,6 +7,7 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { News } from './collections/News'
 import { Pages } from './collections/Pages'
 import { SiteSettings } from './globals/SiteSettings'
 
@@ -23,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Pages],
+  collections: [Users, Media, Pages, News],
   globals: [SiteSettings],
   cors: corsOrigins,
   editor: lexicalEditor(),
